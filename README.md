@@ -28,6 +28,7 @@ Layanan REST API untuk manajemen kendaraaan
 1. POST - Login `host/api/auth/login`
 2. GET - Lihat stok kendaraan `host/api/v1/vehicle/get-stocks`
 3. POST - Penjualan kendaraan `host/api/v1/vehicle/sell`
-4. GET - Laporan penjualan per kendaraan `host/api/v1/vehicle/get-sale-reports`
+4. GET - Lihat penjualan kendaraan `host/api/v1/vehicle/get-sales`
+5. GET - Laporan penjualan per kendaraan `host/api/v1/vehicle/get-sale-reports`
 
 Dokumentasi API lebih lengkap [disini](https://documenter.getpostman.com/view/11372299/UyxhkmT7)
