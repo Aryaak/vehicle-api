@@ -25,7 +25,7 @@ Layanan REST API untuk manajemen kendaraaan
 13. Layanan siap digunakan
 
 ### Endpoint API
-1. POST - Login `host/api/auth/login`
+1. POST - Login `host/api/v1/auth/login`
 2. GET - Lihat stok kendaraan `host/api/v1/vehicle/get-stocks`
 3. POST - Penjualan kendaraan `host/api/v1/vehicle/sell`
 4. GET - Lihat penjualan kendaraan `host/api/v1/vehicle/get-sales`
