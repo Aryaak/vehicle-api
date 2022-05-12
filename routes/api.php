@@ -20,7 +20,7 @@ Route::prefix('v1')->group(function () {
         Route::post('login', [UserController::class, 'login']);
     });
 
-    Route::prefix('vehicle')->group(function () {
+    Route::prefix('vehicle')->middleware('jwt.verify')->group(function () {
         Route::get('get-stocks', [VehicleController::class, 'getStocks'])->name('vehicle.getStocks');
         Route::post('sell', [VehicleController::class, 'sell'])->name('vehicle.sell');
         Route::get('get-sale-reports', [VehicleController::class, 'getSellReports'])->name('vehicle.getSellReports');
