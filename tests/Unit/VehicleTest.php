@@ -12,9 +12,15 @@ class VehicleTest extends TestCase
             ->assertStatus(200);
     }
 
+    public function test_get_sales()
+    {
+        $this->get(route('vehicle.getSales'))
+            ->assertStatus(200);
+    }
+
     public function test_get_sale_reports()
     {
-        $this->get(route('vehicle.getSellReports'))
+        $this->get(route('vehicle.getSaleReports'))
             ->assertStatus(200);
     }
 

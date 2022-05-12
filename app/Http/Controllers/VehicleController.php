@@ -60,10 +60,21 @@ class VehicleController extends Controller
      * @return \App\Utils\ResponseFormatter
      */
 
-    public function getSellReports()
+    public function getSales()
     {
         try {
-            $outoput = $this->service->getSellReports();
+            $outoput = $this->service->getSales();
+        } catch (Exception $e) {
+            return ResponseFormatter::failed($e->getMessage(), $e->getCode());
+        }
+
+        return ResponseFormatter::success('Sale All Sales Success!',  $outoput);
+    }
+
+    public function getSaleReports()
+    {
+        try {
+            $outoput = $this->service->getSaleReports();
         } catch (Exception $e) {
             return ResponseFormatter::failed($e->getMessage(), $e->getCode());
         }

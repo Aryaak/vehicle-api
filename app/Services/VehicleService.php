@@ -3,22 +3,29 @@
 namespace App\Services;
 
 use App\Models\Sale;
+use App\Models\SaleReport;
+use App\Repositories\Sale\EloquentSaleRepository;
+use App\Repositories\SaleReport\EloquentSaleReportRepository;
 use App\Repositories\Vehicle\EloquentVehicleRepository;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class VehicleService
 {
-    private $eloquentRepo;
+    private $vehicleEloquentRepo,
+        $saleEloquentRepo,
+        $saleReportEloquentRepo;
 
-    public function __construct(EloquentVehicleRepository $eloquentRepo)
+    public function __construct(EloquentVehicleRepository $vehicleEloquentRepo, EloquentSaleRepository $saleEloquentRepo, EloquentSaleReportRepository $saleReportEloquentRepo)
     {
-        $this->eloquentRepo = $eloquentRepo;
+        $this->vehicleEloquentRepo = $vehicleEloquentRepo;
+        $this->saleEloquentRepo = $saleEloquentRepo;
+        $this->saleReportEloquentRepo = $saleReportEloquentRepo;
     }
 
     public function getStocks()
     {
-        return $this->eloquentRepo->getAll();
+        return $this->vehicleEloquentRepo->getAll();
     }
 
 
@@ -35,21 +42,50 @@ class VehicleService
         if ($validator->fails()) throw new Exception($validator->errors()->first());
 
         // Check vehicle
-        $vehicle = $this->eloquentRepo->find($input['id_kendaraan']);
+        $vehicle = $this->vehicleEloquentRepo->find($input['id_kendaraan']);
 
         if (!$vehicle) throw new Exception("Vehicle not found", 500);
 
         // Check stock
         if ($vehicle->stock < $input['jumlah'] || $vehicle->stock <= 0) throw new Exception("Insufficient Vehicle Stock", 204);
 
-        $this->eloquentRepo->reduceStock($input['id_kendaraan'], $input['jumlah']);
+        $this->vehicleEloquentRepo->reduceStock($input['id_kendaraan'], $input['jumlah']);
 
         // Sell
-        return Sale::create($input);
+        $sell =  $this->saleEloquentRepo->store($input);
+
+        // Create sale report
+        $saleReport = $this->saleReportEloquentRepo->getByVehicle($input['id_kendaraan']);
+
+        if ($saleReport) {
+            $this->saleReportEloquentRepo->update($saleReport->id, $sell);
+            return 'update';
+        } {
+            $this->saleReportEloquentRepo->store([
+                'id_kendaraan' => $input['id_kendaraan'],
+                'jumlah' => $sell->jumlah,
+                'total' => $sell->total,
+                'daftar_penjualan' => [
+                    [
+                        'pembeli' => $sell->pembeli,
+                        'jumlah' => $sell->jumlah,
+                        'total' => $sell->total
+                    ]
+                ]
+            ]);
+            return $sell;
+        }
+
+        return $sell;
     }
 
-    public function getSellReports()
+    public function getSales()
     {
-        return $this->eloquentRepo->getSaleReports();
+        return $this->saleEloquentRepo->getAll();
+    }
+
+    public function getSaleReports()
+    {
+        return $this->saleReportEloquentRepo->getAll();
     }
 }
