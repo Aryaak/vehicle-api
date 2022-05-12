@@ -14,8 +14,11 @@ Layanan REST API untuk manajemen kendaraaan
 4. Buat database pada mongodb dengan nama `vehicle_api`
 5. Jalankan seeder `php artisan db:seed`
 6. Generate secret code JWT dengan menjalankan `php artisan jwt:secret`
-7. Jalankan service dengan `php artisan serve`
-8. Layanan siap digunakan
+7. Jalankan unit testing :
+   - windows `vendor\bin\phpunit`
+   - linux `./vendor/bin/phpunit` 
+9. Jalankan service dengan `php artisan serve`
+10. Layanan siap digunakan
 
 ### Endpoint API
 1. POST - Login `host/api/auth/login`
