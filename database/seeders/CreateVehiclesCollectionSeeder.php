@@ -24,7 +24,7 @@ class CreateVehiclesCollectionSeeder extends Seeder
                 "kapasitas_penumpang" => 7,
                 "tipe" => "MPV"
             ],
-            "stock" => 95,
+            "stock" => 5,
         ]);
 
         Vehicle::create([
