@@ -59,7 +59,6 @@ class VehicleService
 
         if ($saleReport) {
             $this->saleReportEloquentRepo->update($saleReport->id, $sell);
-            return 'update';
         } {
             $this->saleReportEloquentRepo->store([
                 'id_kendaraan' => $input['id_kendaraan'],
@@ -73,7 +72,6 @@ class VehicleService
                     ]
                 ]
             ]);
-            return $sell;
         }
 
         return $sell;
