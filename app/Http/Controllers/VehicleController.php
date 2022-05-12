@@ -68,7 +68,7 @@ class VehicleController extends Controller
             return ResponseFormatter::failed($e->getMessage(), $e->getCode());
         }
 
-        return ResponseFormatter::success('Sale All Sales Success!',  $outoput);
+        return ResponseFormatter::success('Get All Sales Success!',  $outoput);
     }
 
     public function getSaleReports()
@@ -79,6 +79,6 @@ class VehicleController extends Controller
             return ResponseFormatter::failed($e->getMessage(), $e->getCode());
         }
 
-        return ResponseFormatter::success('Sale All Vehicles Sales Reports Success!',  $outoput);
+        return ResponseFormatter::success('Get All Vehicles Sales Reports Success!',  $outoput);
     }
 }

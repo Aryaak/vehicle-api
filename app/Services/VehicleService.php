@@ -59,7 +59,7 @@ class VehicleService
 
         if ($saleReport) {
             $this->saleReportEloquentRepo->update($saleReport->id, $sell);
-        } {
+        } else {
             $this->saleReportEloquentRepo->store([
                 'id_kendaraan' => $input['id_kendaraan'],
                 'jumlah' => $sell->jumlah,
