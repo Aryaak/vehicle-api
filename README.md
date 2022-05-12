@@ -11,17 +11,18 @@ Layanan REST API untuk manajemen kendaraaan
 1. Clone repository menggunakan git bash  `git clone https://github.com/Aryaak/vehicle-api.git`
 2. Masuk ke dalam project `cd vehicle-api`
 3. Install paket yang dibutuhkan dengan menjalankan `composer install`
-4. Buat database pada mongodb dengan nama `vehicle_api`
+4. Buat database pada mongodb dengan nama `vehicle_api` dan collection `kendaraan`
 5. Ubah nama file `.env.example` menjadi `.env`
 6. Sesuaikan konfigurasi mongodb pada file `.env` sesuai dengan koneksi mongodb anda <br>
 ![Untitled](https://user-images.githubusercontent.com/55610152/168071383-ce37137d-d439-4090-8425-1bcf52076a73.png)
 8. Jalankan seeder `php artisan db:seed`
 9. Generate secret code JWT dengan menjalankan `php artisan jwt:secret`
-10. Jalankan unit testing :
+10. Generate app key dengan menjalankan `php artisan key:generate`
+11. Jalankan unit testing :
    - windows `vendor\bin\phpunit`
    - linux `./vendor/bin/phpunit` 
-11. Jalankan service dengan `php artisan serve`
-12. Layanan siap digunakan
+12. Jalankan service dengan `php artisan serve`
+13. Layanan siap digunakan
 
 ### Endpoint API
 1. POST - Login `host/api/auth/login`
